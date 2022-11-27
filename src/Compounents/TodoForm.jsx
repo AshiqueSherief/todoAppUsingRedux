@@ -3,6 +3,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { text } from "../Redux/Action";
+import { v4 as uuidv4 } from "uuid";
 
 function TodoForm() {
   const dispatch = useDispatch();
@@ -34,11 +35,12 @@ function TodoForm() {
               {/* todoid*/}
               <div class="mb-6">
                 <label for="totoid" class="block mb-2 text-sm text-gray-600">
-                  Todo Title
+                  Todo ID
                 </label>
                 <input
                   type="text"
                   name="todoid"
+                  value={uuidv4()}
                   placeholder="Todo ID"
                   class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md  focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
                 />
@@ -107,7 +109,7 @@ function TodoForm() {
                   type="submit"
                   class="w-full px-2 py-4 text-white bg-indigo-500 rounded-md  focus:bg-indigo-600 focus:outline-none"
                 >
-                  Send Message
+                  Add +
                 </button>
               </div>
             </form>
@@ -120,5 +122,3 @@ function TodoForm() {
 }
 
 export default TodoForm;
-// Creating For--Startm
-// Creating Form --End

@@ -10,7 +10,7 @@ function MainPage() {
       <div className="Aligning_the_search_and_add">
         {/* Search box --Starts */}
         <div class="  flex flex-col justify-center">
-          <div class="relative p-12 w-full sm:max-w-2xl sm:mx-auto">
+          <div class="relative p-12 w-full sm:max-w-2xl ">
             <div class="overflow-hidden z-0 rounded-full relative p-3">
               <form
                 role="form"
@@ -19,7 +19,7 @@ function MainPage() {
                 <input
                   type="text"
                   placeholder="enter your search here"
-                  class="rounded-full flex-1 px-6 py-4 text-gray-700 focus:outline-none"
+                  class="rounded-full flex-1 px-6 py-4 text-gray-700 focus:outline-none w-96"
                 />
                 <button class="bg-indigo-500 text-white rounded-full font-semibold px-8 py-4 hover:bg-indigo-400 focus:bg-indigo-600 focus:outline-none">
                   Search

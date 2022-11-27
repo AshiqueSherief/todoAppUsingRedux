@@ -1,17 +1,25 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { text } from "../Redux/Action";
+import { v4 as uuidv4 } from "uuid";
 
 function TodoForm() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const updateForm = (e) => {
-    let targ = e.target;
+    e.preventDefault();
     let temp = {
-      id: targ.todoid,
-      name: targ.todoname,
-      startDate: targ.startdate,
-      endDate: targ.enddate,
-      status: targ.status,
-      comment: targ.comment,
+      id: e.target.todoid.value,
+      name: e.target.todoname.value,
+      startDate: e.target.startDate.value,
+      endDate: e.target.endDate.value,
+      status: e.target.status.value,
+      comment: e.target.comments.value,
     };
+    dispatch(text(temp));
+    navigate("/home");
     console.log("checking temp value", temp);
   };
   return (
@@ -23,17 +31,17 @@ function TodoForm() {
             <h1 class="my-3 text-3xl font-semibold text-gray-700">HooTo-DO</h1>
           </div>
           <div>
-            <form onSubmit={updateForm} method="POST">
-              {/* todoname */}
+            <form onSubmit={updateForm}>
+              {/* todoid*/}
               <div class="mb-6">
                 <label for="totoid" class="block mb-2 text-sm text-gray-600">
-                  Todo Title
+                  Todo ID
                 </label>
                 <input
                   type="text"
                   name="todoid"
+                  value={uuidv4()}
                   placeholder="Todo ID"
-                  required
                   class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md  focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
                 />
               </div>
@@ -46,7 +54,6 @@ function TodoForm() {
                   type="text"
                   name="todoname"
                   placeholder="Todo Title"
-                  required
                   class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md  focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
                 />
               </div>
@@ -58,19 +65,17 @@ function TodoForm() {
                 <input
                   type="date"
                   name="startDate"
-                  required
                   class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md  focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
                 />
               </div>
               {/* End Date */}
               <div class="mb-6">
-                <label for="endStart" class="text-sm text-gray-600">
+                <label for="endDate" class="text-sm text-gray-600">
                   End Date
                 </label>
                 <input
                   type="date"
                   name="endDate"
-                  required
                   class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md  focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
                 />
               </div>
@@ -83,7 +88,6 @@ function TodoForm() {
                   type="text"
                   name="status"
                   placeholder="Status"
-                  required
                   class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md  focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
                 />
               </div>
@@ -98,7 +102,6 @@ function TodoForm() {
                   name="comments"
                   placeholder="Comments Here..."
                   class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md  focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
-                  required
                 ></textarea>
               </div>
               <div class="mb-6">
@@ -119,5 +122,3 @@ function TodoForm() {
 }
 
 export default TodoForm;
-// Creating For--Startm
-// Creating Form --End

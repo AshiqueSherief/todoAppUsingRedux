@@ -1,8 +1,12 @@
 import { React } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { deleter, updater } from "../Redux/Action";
 
 function FormSub() {
   const count = useSelector((state) => state.value);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   console.log("checking if the value available in TR", count);
 
@@ -64,6 +68,9 @@ function FormSub() {
                           <button
                             type="button"
                             class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 w-10px rounded focus:outline-none focus:shadow-outline"
+                            onClick={() => {
+                              dispatch(deleter(e.id));
+                            }}
                           >
                             Edit
                           </button>
@@ -72,6 +79,10 @@ function FormSub() {
                           <button
                             type="button"
                             class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                            onClick={() => {
+                              dispatch(updater(e.id));
+                              navigate("/editTodo");
+                            }}
                           >
                             Delete
                           </button>

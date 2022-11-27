@@ -4,10 +4,15 @@
 }
 
 .MainPaige {
-  background-color: #cae6ed;
+  background-color: linear-gradient(
+    180deg,
+    rgba(177, 228, 238, 1) 30%,
+    rgba(184, 221, 228, 1) 50%,
+    rgba(255, 255, 255, 1) 100%
+  );
 }
 .Aligning_the_search_and_add {
-  background-color: #cae6ed;
+  background-color: rgba(177, 228, 238, 1);
   display: flex;
   margin-left: 25%;
   margin-right: 25%;
