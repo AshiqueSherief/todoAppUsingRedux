@@ -1,26 +1,46 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { text } from "../Redux/Action";
+import { text, updater } from "../Redux/Action";
 import { v4 as uuidv4 } from "uuid";
+import { useState } from "react";
 
-function TodoForm() {
+function TodoFormEdit() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const updateForm = (e) => {
-    e.preventDefault();
-    let temp = {
-      id: e.target.todoid.value,
-      name: e.target.todoname.value,
-      startDate: e.target.startDate.value,
-      endDate: e.target.endDate.value,
-      status: e.target.status.value,
-      comment: e.target.comments.value,
-    };
-    dispatch(text(temp));
-    navigate("/home");
-    console.log("checking temp value", temp);
+
+  const val = useSelector((state) => state.value1);
+  const object = val[0];
+
+  const [editor, setEditor] = useState({
+    id: val.id,
+    name: val.name,
+    startDate: val.startDate,
+    endDate: val.endDate,
+    status: val.status,
+    comment: val.comment,
+  });
+
+  console.log("obj in FormEdt", object);
+
+  // const updateForm = (e) => {
+  //   e.preventDefault();
+  //   let temp = {
+  //     id: e.target.todoid.value,
+  //     name: e.target.todoname.value,
+  //     startDate: e.target.startDate.value,
+  //     endDate: e.target.endDate.value,
+  //     status: e.target.status.value,
+  //     comment: e.target.comments.value,
+  //   };
+  //   dispatch(text(temp));
+  //   navigate("/home");
+  //   console.log("checking temp value", temp);
+  // };
+  const updateValue = (e) => {
+    setEditor({ ...editor, [e.target.name]: e.target.value });
+    console.log("editor", editor);
   };
   return (
     <div>
@@ -31,7 +51,7 @@ function TodoForm() {
             <h1 class="my-3 text-3xl font-semibold text-gray-700">HooTo-DO</h1>
           </div>
           <div>
-            <form onSubmit={updateForm}>
+            <form>
               {/* todoid*/}
               <div class="mb-6">
                 <label for="totoid" class="block mb-2 text-sm text-gray-600">
@@ -40,7 +60,7 @@ function TodoForm() {
                 <input
                   type="text"
                   name="todoid"
-                  value={uuidv4()}
+                  value={object.id}
                   placeholder="Todo ID"
                   class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md  focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
                 />
@@ -52,6 +72,8 @@ function TodoForm() {
                 </label>
                 <input
                   type="text"
+                  value={object.name}
+                  onChange={updateValue}
                   name="todoname"
                   placeholder="Todo Title"
                   class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md  focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
@@ -64,6 +86,8 @@ function TodoForm() {
                 </label>
                 <input
                   type="date"
+                  value={object.startDate}
+                  onChange={updateValue}
                   name="startDate"
                   class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md  focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
                 />
@@ -75,6 +99,8 @@ function TodoForm() {
                 </label>
                 <input
                   type="date"
+                  value={object.endDate}
+                  onChange={updateValue}
                   name="endDate"
                   class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md  focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
                 />
@@ -87,6 +113,8 @@ function TodoForm() {
                 <input
                   type="text"
                   name="status"
+                  value={object.status}
+                  onChange={updateValue}
                   placeholder="Status"
                   class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md  focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
                 />
@@ -100,6 +128,8 @@ function TodoForm() {
                 <textarea
                   rows="5"
                   name="comments"
+                  value={object.comment}
+                  onChange={updateValue}
                   placeholder="Comments Here..."
                   class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md  focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
                 ></textarea>
@@ -109,7 +139,7 @@ function TodoForm() {
                   type="submit"
                   class="w-full px-2 py-4 text-white bg-indigo-500 rounded-md  focus:bg-indigo-600 focus:outline-none"
                 >
-                  Send Message
+                  Add +
                 </button>
               </div>
             </form>
@@ -121,4 +151,4 @@ function TodoForm() {
   );
 }
 
-export default TodoForm;
+export default TodoFormEdit;

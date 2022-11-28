@@ -11,7 +11,7 @@ const Reducer = (state = initialState, action) => {
     case TEXT:
       console.log("#sh dispatched value in TEXT switch case", action.payload);
       const temp1 = [...state.value, action.payload];
-      console.log("value in temp in reducer", temp1);
+      console.log("value in temp1 in reducer", temp1);
       return {
         ...state,
         value: temp1,
@@ -26,9 +26,10 @@ const Reducer = (state = initialState, action) => {
     case UPDATE:
       console.log("#sh dispatched value in UPDATE switch case", action.payload);
       const temp3 = state.value.filter((t) => t.id === action.payload);
+      console.log("value in temp3 in reducer", temp3);
       return {
         ...state,
-        value2: temp3,
+        value1: temp3,
       };
     default:
       return state;

@@ -62,17 +62,18 @@ function FormSub() {
                           {e.status}
                         </td>
                         <td class="text-dark border-b border-[#E8E8E8] bg-white py-5 px-2 text-center text-base font-medium">
-                          {e.comments}
+                          {e.comment}
                         </td>
                         <td class="text-dark border-b border-l border-[#E8E8E8] bg-[#F3F6FF] py-5 px-2 w-10px text-center text-base font-medium">
                           <button
                             type="button"
                             class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 w-10px rounded focus:outline-none focus:shadow-outline"
                             onClick={() => {
-                              dispatch(deleter(e.id));
+                              dispatch(updater(e.id));
+                              navigate("/editTodo");
                             }}
                           >
-                            Edit
+                            Add
                           </button>
                         </td>
                         <td class="text-dark border-b border-l border-[#E8E8E8] bg-[#F3F6FF] py-5 px-2 text-center text-base font-medium">
@@ -80,8 +81,7 @@ function FormSub() {
                             type="button"
                             class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                             onClick={() => {
-                              dispatch(updater(e.id));
-                              navigate("/editTodo");
+                              dispatch(deleter(e.id));
                             }}
                           >
                             Delete
