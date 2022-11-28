@@ -73,7 +73,7 @@ function FormSub() {
                               navigate("/editTodo");
                             }}
                           >
-                            Add
+                            Edit
                           </button>
                         </td>
                         <td class="text-dark border-b border-l border-[#E8E8E8] bg-[#F3F6FF] py-5 px-2 text-center text-base font-medium">

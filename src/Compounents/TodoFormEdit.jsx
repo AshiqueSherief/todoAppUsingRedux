@@ -28,17 +28,9 @@ function TodoFormEdit() {
 
   const updateForm = (e) => {
     e.preventDefault();
-    let temp = {
-      id: e.target.id.value,
-      name: e.target.name.value,
-      startDate: e.target.startDate.value,
-      endDate: e.target.endDate.value,
-      status: e.target.status.value,
-      comment: e.target.comment.value,
-    };
-    dispatch(display(temp));
+    dispatch(display(editor));
     navigate("/home");
-    console.log("checking temp value", temp);
+    console.log("checking temp value display", editor);
   };
   return (
     <div>
