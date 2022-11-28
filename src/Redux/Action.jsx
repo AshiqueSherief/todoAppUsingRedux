@@ -1,4 +1,4 @@
-import { TEXT, DELETE, UPDATE } from "./Type";
+import { TEXT, DELETE, UPDATE, DISPLAY } from "./Type";
 
 export const text = (temp) => {
   return {
@@ -12,6 +12,12 @@ export const deleter = (id) => {
 export const updater = (id) => {
   return {
     type: UPDATE,
+    payload: id,
+  };
+};
+export const display = (id) => {
+  return {
+    type: DISPLAY,
     payload: id,
   };
 };

@@ -1,4 +1,4 @@
-import { TEXT, DELETE, UPDATE } from "./Type";
+import { TEXT, DELETE, UPDATE, DISPLAY } from "./Type";
 
 const initialState = {
   value: [],
@@ -30,6 +30,14 @@ const Reducer = (state = initialState, action) => {
       return {
         ...state,
         value1: temp3,
+      };
+    case DISPLAY:
+      let temp4 = [...state.value];
+      let index = temp4.findIndex((e) => e.id === action.payload.id);
+      temp4[index] = action.payload;
+      return {
+        ...state,
+        value: [...temp4],
       };
     default:
       return state;
