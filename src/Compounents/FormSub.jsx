@@ -1,15 +1,35 @@
-import { React } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { React, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleter, updater } from "../Redux/Action";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
 
-function FormSub() {
-  const count = useSelector((state) => state.value);
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
+function FormSub(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log("checking if the value available in TR", count);
+  const { resultObject } = props;
 
+  console.log("RObject-->", resultObject);
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <div>
       <div class="bg-[#dae7eb] py-20 lg:py-[50px] h-max ">
@@ -44,7 +64,7 @@ function FormSub() {
                     </tr>
                   </thead>
                   <tbody>
-                    {count.map((e) => (
+                    {resultObject.map((e) => (
                       <tr class="bg-primary text-center">
                         <td class="text-dark border-b border-l border-[#E8E8E8] bg-[#F3F6FF] py-5 px-2 text-center text-base font-medium">
                           {e.id}
@@ -77,15 +97,38 @@ function FormSub() {
                           </button>
                         </td>
                         <td class="text-dark border-b border-l border-[#E8E8E8] bg-[#F3F6FF] py-5 px-2 text-center text-base font-medium">
-                          <button
+                          <Button
                             type="button"
                             class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                             onClick={() => {
                               dispatch(deleter(e.id));
+                              handleOpen();
                             }}
                           >
                             Delete
-                          </button>
+                          </Button>
+                          <Modal
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                          >
+                            <Box sx={style}>
+                              <Typography
+                                id="modal-modal-title"
+                                variant="h6"
+                                component="h2"
+                              >
+                                Are you Sure?
+                              </Typography>
+                              <Typography
+                                id="modal-modal-description"
+                                sx={{ mt: 2 }}
+                              >
+                                the action will result in deleting the task
+                              </Typography>
+                            </Box>
+                          </Modal>
                         </td>
                       </tr>
                     ))}
